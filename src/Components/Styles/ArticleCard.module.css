@@ -1,0 +1,93 @@
+body {
+  /* padding: 10px; */
+}
+
+.title {
+  grid-area: title;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.author {
+  grid-area: author;
+}
+
+.topic {
+  grid-area: topic;
+}
+
+.topic:hover {
+  color: white;
+  background-color: #696969;
+}
+
+.comments {
+  grid-area: comments;
+}
+
+.comments:hover {
+  color: white;
+  background-color: #696969;
+}
+
+.created_at {
+  grid-area: created;
+}
+
+.up {
+  grid-area: up;
+}
+
+.down {
+  grid-area: down;
+}
+
+.votes {
+  grid-area: votes;
+
+  /* font-size: 2em; */
+  font-weight: bold;
+}
+
+.wrapper {
+  margin: auto;
+  margin-top: 10px;
+  width: 75%;
+
+  display: grid;
+
+  grid-template-areas:
+    "title title title ... up"
+    "title title title ... votes"
+    "title title title ... down"
+    "created author topic ... comments ";
+  text-align: center;
+  /* grid-gap: 10px; */
+  font-family: "Lucida Console", Monaco, monospace;
+  background-color: #dcdcdc;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  color: #2a3439;
+  border-style: solid;
+  border-width: 1.5px;
+  border-color: #a9a9a9;
+}
+
+button {
+  border: none;
+  color: white;
+  margin: 3px;
+  padding: 1px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.up {
+  background-color: #556b2f;
+}
+
+.down {
+  background-color: #b22222;
+}

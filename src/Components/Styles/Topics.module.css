@@ -1,0 +1,21 @@
+ul {
+  margin: 20;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  list-style-type: none;
+}
+
+li {
+  flex-grow: 1;
+
+  flex-shrink: 1 auto;
+  flex-basis: 50%;
+  padding: 20px;
+}
+
+li:hover {
+  background-color: whitesmoke;
+}
