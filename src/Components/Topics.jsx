@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "@reach/router";
 import style from "./Styles/Topics.module.css";
 
 class Topics extends Component {
@@ -14,9 +15,22 @@ class Topics extends Component {
   };
   render() {
     return (
-      <ul>
+      <ul className={style.navBar}>
+        <div className={style.navBarItemDiv}>
+          <Link to="/">
+            <li key="all" className={style.navBarItem}>
+              all
+            </li>
+          </Link>
+        </div>
         {this.state.topics.map(topic => {
-          return <li>{topic.slug}</li>;
+          return (
+            <div key={topic.slug} className={style.navBarItemDiv}>
+              <Link key={topic.slug} to={"/topic/" + topic.slug}>
+                <li className={style.navBarItem}>{topic.slug}</li>
+              </Link>
+            </div>
+          );
         })}
       </ul>
     );
