@@ -11,18 +11,18 @@ class ArticleList extends Component {
   };
 
   handleSortByClick = query => {
-    // console.dir(query);
     this.setState({ sortBy: query });
   };
 
   componentDidMount() {
-    api.getArticles().then(articles => {
+    api.getArticles(this.state.sortBy, this.props.topicName).then(articles => {
       this.setState({ articles });
     });
   }
 
   componentDidUpdate(prevProps, prevState) {
     const { topicName } = this.props;
+    console.log(topicName);
 
     const topicNameChange = prevProps.topicName !== topicName;
     const queryChange = prevState.sortBy !== this.state.sortBy;

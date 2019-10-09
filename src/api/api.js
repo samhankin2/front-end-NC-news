@@ -45,3 +45,23 @@ export const postNewComment = (articleID, commentObj) => {
       return data.comment;
     });
 };
+
+export const deleteCommentByCommentId = comment_id => {
+  return api.delete("/comments/" + comment_id);
+};
+
+export const patchCommentVotes = (comment_id, number) => {
+  return api
+    .patch("./comments/" + comment_id, { inc_votes: number })
+    .then(({ data }) => {
+      return data.comment.votes;
+    });
+};
+
+export const patchArticleVotes = (aritlce_id, number) => {
+  return api
+    .patch("./articles/" + aritlce_id, { inc_votes: number })
+    .then(({ data }) => {
+      return data.article.votes;
+    });
+};

@@ -7,7 +7,7 @@ class AddComment extends Component {
   submitNewComment = event => {
     event.preventDefault();
     const newComment = {
-      username: "weegembump",
+      username: this.props.loggedInUser,
       body: this.state.body
     };
 

@@ -23,18 +23,34 @@ class CommentList extends Component {
     });
   };
 
+  deleteCommentHandler = commentID => {
+    let copiedState = this.state.comments.map(comment => ({ ...comment }));
+    copiedState = this.state.comments.filter(comment => {
+      return comment.comment_id !== commentID;
+    });
+    this.setState({ comments: copiedState });
+    api.deleteCommentByCommentId(commentID).then(() => {
+      console.log("deleted");
+    });
+  };
+
   render() {
+    const { loggedInUser } = this.props;
     return (
       <>
         <section>
           {this.state.comments &&
             this.state.comments.map(comment => {
-              return <CommentCard key={comment.comment_id} {...comment} />;
+              let props = { ...comment };
+              props.loggedInUser = loggedInUser;
+              props.deleteCommentHandler = this.deleteCommentHandler;
+              return <CommentCard key={comment.comment_id} {...props} />;
             })}
         </section>
         <AddComment
           articleId={this.props.articleId}
           addNewCommentHandler={this.addNewCommentHandler}
+          loggedInUser={loggedInUser}
         />
       </>
     );
