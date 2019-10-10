@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./Styles/ArticleCard.module.css";
 import { Link } from "@reach/router";
 import * as api from "../api/api";
+import Vote from "./Vote";
 
 class ArticleCard extends Component {
   state = { votes: this.props.votes };
@@ -39,16 +40,12 @@ class ArticleCard extends Component {
             <p className={styles.topic}>{topic}</p>
             <p className={styles.comments}>comments: {comment_count}</p>
             <p className={styles.created_at}>{created_at.slice(0, 10)}</p>
-
-            <p className={styles.votes}>{this.state.votes || votes}</p>
           </div>
         </Link>
-        <button className={styles.up} onClick={this.handleVote}>
-          up
-        </button>
-        <button className={styles.down} onClick={() => this.handleVote("down")}>
-          down
-        </button>
+        <Vote
+          votes={this.props.votes}
+          article_id={this.props.article_id}
+        ></Vote>
       </div>
     );
   }

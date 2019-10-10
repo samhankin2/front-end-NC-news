@@ -3,6 +3,7 @@ import ArticleCard from "./ArticleCard";
 import { Link } from "@reach/router";
 import style from "./Styles/ArticleList.module.css";
 import * as api from "../api/api";
+import Error from "./Error";
 
 class ArticleList extends Component {
   state = {
@@ -15,9 +16,14 @@ class ArticleList extends Component {
   };
 
   componentDidMount() {
-    api.getArticles(this.state.sortBy, this.props.topicName).then(articles => {
-      this.setState({ articles });
-    });
+    api
+      .getArticles(this.state.sortBy, this.props.topicName)
+      .then(articles => {
+        this.setState({ articles });
+      })
+      .catch(({ message }) => {
+        this.setState({ err: `${message}: Topic doesnt exist` });
+      });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -72,6 +78,8 @@ class ArticleList extends Component {
           return <ArticleCard key={article.article_id} {...article} />;
         })}
       </div>
+    ) : this.state.err ? (
+      <Error message={this.state.err}></Error>
     ) : (
       "Loading..."
     );

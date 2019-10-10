@@ -52,7 +52,7 @@ export const deleteCommentByCommentId = comment_id => {
 
 export const patchCommentVotes = (comment_id, number) => {
   return api
-    .patch("./comments/" + comment_id, { inc_votes: number })
+    .patch("/comments/" + comment_id, { inc_votes: number })
     .then(({ data }) => {
       return data.comment.votes;
     });
@@ -60,8 +60,31 @@ export const patchCommentVotes = (comment_id, number) => {
 
 export const patchArticleVotes = (aritlce_id, number) => {
   return api
-    .patch("./articles/" + aritlce_id, { inc_votes: number })
+    .patch("/articles/" + aritlce_id, { inc_votes: number })
     .then(({ data }) => {
       return data.article.votes;
+    });
+};
+
+export const postNewUser = (username, password) => {
+  console.log(username, password);
+  return api
+    .post("/users", {
+      username,
+      password
+    })
+    .then(({ data }) => {
+      return data.newUser;
+    });
+};
+
+export const logInUser = (username, password) => {
+  return api
+    .post("/login", {
+      username,
+      password
+    })
+    .then(({ data }) => {
+      return data;
     });
 };

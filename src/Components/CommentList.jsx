@@ -24,11 +24,14 @@ class CommentList extends Component {
   };
 
   deleteCommentHandler = commentID => {
-    let copiedState = this.state.comments.map(comment => ({ ...comment }));
-    copiedState = this.state.comments.filter(comment => {
-      return comment.comment_id !== commentID;
+    this.setState(prevState => {
+      let copiedState = prevState.comments.map(comment => ({ ...comment }));
+      copiedState = prevState.comments.filter(comment => {
+        return comment.comment_id !== commentID;
+      });
+
+      return { comments: copiedState };
     });
-    this.setState({ comments: copiedState });
     api.deleteCommentByCommentId(commentID).then(() => {
       console.log("deleted");
     });
@@ -39,6 +42,11 @@ class CommentList extends Component {
     return (
       <>
         <section>
+          <AddComment
+            articleId={this.props.articleId}
+            addNewCommentHandler={this.addNewCommentHandler}
+            loggedInUser={loggedInUser}
+          />
           {this.state.comments &&
             this.state.comments.map(comment => {
               let props = { ...comment };
@@ -47,11 +55,6 @@ class CommentList extends Component {
               return <CommentCard key={comment.comment_id} {...props} />;
             })}
         </section>
-        <AddComment
-          articleId={this.props.articleId}
-          addNewCommentHandler={this.addNewCommentHandler}
-          loggedInUser={loggedInUser}
-        />
       </>
     );
   }
